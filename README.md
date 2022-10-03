@@ -1,14 +1,14 @@
 # 42_linear_regression
 Simple linear regression using numpy
 
+# Run
+just run `make` and activate the virtual env with the code below
+
 # Activate Python3 virutal environment
 `source .venv/bin/activate`
 
-# Install dependencies
-`python3 -m pip install -r requirements.txt`
-
 # To predict
-`predict.py`
+`python3 predict.py`
 
 # To train the model
-`train_model.py`
+`python3 train.py`
