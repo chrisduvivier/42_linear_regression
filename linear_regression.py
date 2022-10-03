@@ -88,7 +88,7 @@ class LinearRegressionModel():
                 self.J_history.append(cost_function(x, y, w, b))
                 self.p_history.append([w, b])
             if (i % math.ceil(num_iters/10) == 0):
-                print(f"Iteration {i:4}: Cost {J_history[-1]:0.2e} ",
+                print(f"Iteration {i:4}: Cost {self.J_history[-1]:0.2e} ",
                     f"dj_dw: {dj_dw: 0.3e}, dj_db: {dj_db: 0.3e}  ",
                     f"w: {w: 0.3e}, b:{b: 0.5e}")
                 
@@ -107,3 +107,12 @@ class LinearRegressionModel():
         """
         y = np.dot(x, w) + b
         return y
+
+    def r_square(self, y, y_pred):
+        """
+        calculate the R square metrics
+        """
+        corr_matrix = np.corrcoef(y, y_pred)
+        corr = corr_matrix[0, 1]
+        r_sq = corr**2
+        return r_sq

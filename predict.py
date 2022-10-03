@@ -8,6 +8,9 @@ def check_user_input(input):
     try:
         # Convert it into integer
         val = int(input)
+        if val < 0:
+            print("Error: Input must be a positive number")
+            exit()
     except ValueError:
         try:
             # Convert it into float
@@ -18,17 +21,22 @@ def check_user_input(input):
     return val
 
 def load_parameters(path):
+    """
+    load theta0 and theta1 from csv file. note that w = theta0, b = theta1
+    """
     if not os.path.exists(path):
         print("Error: file with parameters is missing")
         exit()
     
     df = pd.read_csv(path)
     thetas = [np.array(df["theta0"][0]), np.array(df["theta1"][0])]
-    norm_mean = np.array(df["normalization_mean"][0])
-    norm_std = np.array(df["normalization_std"][0])
-    return thetas, norm_mean, norm_std
+    return thetas
 
 def load_norm_parameters(path):
+    """
+    Load parameters used for normalization in the training process.
+    return the mean and standard deviation of the independent variable X (km)
+    """
     if not os.path.exists(path):
         print("Error: file with normalization data is missing")
         exit()
@@ -56,7 +64,9 @@ if __name__ == "__main__":
 
     mileage = check_user_input(input("Provide the mileage (in km) to predict the price on: "))
     normalize_mileage = normalize_input(mileage, norm_mean, norm_std)
-    prediction = LinearRegressionModel.predict(normalize_mileage, thetas[0], thetas[1])
-    print("Predicted price for the given mileage is: " + str(prediction))
+    Model = LinearRegressionModel()
+    prediction = Model.predict(normalize_mileage, thetas[0], thetas[1])
+
+    print(f"Predicted price for the given mileage is: {prediction:8.2f}")
 
     
