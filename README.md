@@ -1,5 +1,5 @@
 # 42_linear_regression
-Simple linear regression using numpy
+The goal is to implement a simple linear regression from scratch, using numpy
 
 # Run
 just run `make` and activate the virtual env with the code below
